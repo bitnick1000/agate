@@ -5,8 +5,6 @@ import (
 	"time"
 )
 
-var level int
-
 const (
 	TRACE = iota
 	DEBUG
@@ -26,6 +24,8 @@ const (
 	cancelColor = "\x1b[0m"
 )
 
+var Level int
+
 const timeFormat = "2006-01-02 15:04:05.999"
 
 func printColor() {
@@ -40,7 +40,7 @@ func printColor() {
 
 // func print(printLevel int, format string, a ...interface{}) {
 // 	// printColor()
-// 	if printLevel > level {
+// 	if printLevel > Level {
 // 		// fmt.Println("\x1b[30;1mHello, World!\x1b[0m")
 // 		// fmt.Println("\x1b[31;1mHello, Red!\x1b[0m")
 // 		// fmt.Println("\x1b[32;0mHello, Green!\x1b[0m")
@@ -59,7 +59,7 @@ func printColor() {
 // }
 
 func Trace(message string) {
-	if level <= TRACE {
+	if Level <= TRACE {
 		now := time.Now().Format(timeFormat)
 		message := fmt.Sprintf("%s %s %s", now, "[TRACE]", message)
 		fmt.Printf("%s%s%s\n", traceColor, message, cancelColor)
@@ -67,39 +67,35 @@ func Trace(message string) {
 }
 
 func Debug(message string) {
-	if level <= DEBUG {
+	if Level <= DEBUG {
 		now := time.Now().Format(timeFormat)
 		message := fmt.Sprintf("%s %s %s", now, "[DEBUG]", message)
 		fmt.Printf("%s%s%s\n", debugColor, message, cancelColor)
-
 	}
 }
 func Info(message string) {
-	if level <= INFO {
+	if Level <= INFO {
 		now := time.Now().Format(timeFormat)
 		message := fmt.Sprintf("%s %s %s", now, "[INFO]", message)
 		fmt.Printf("%s%s%s\n", infoColor, message, cancelColor)
 	}
-
 }
 func Warn(message string) {
-	if level <= WARN {
+	if Level <= WARN {
 		now := time.Now().Format(timeFormat)
 		message := fmt.Sprintf("%s %s %s", now, "[WARN]", message)
 		fmt.Printf("%s%s%s\n", warnColor, message, cancelColor)
 	}
-
 }
 func Error(message string) {
-	if level <= ERROR {
+	if Level <= ERROR {
 		now := time.Now().Format(timeFormat)
 		message := fmt.Sprintf("%s %s %s", now, "[ERROR]", message)
 		fmt.Printf("%s%s%s\n", errorColor, message, cancelColor)
-
 	}
 }
 func Fatal(message string) {
-	if level <= FATAL {
+	if Level <= FATAL {
 		now := time.Now().Format(timeFormat)
 		message := fmt.Sprintf("%s %s %s", now, "[FATAL]", message)
 		fmt.Printf("%s%s%s\n", fatalColor, message, cancelColor)
